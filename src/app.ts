@@ -22,37 +22,37 @@ const app: Application = express();
 
 app.use(express.json());
 
-app.post('/developers', veriryEmailExist, createDevelper); // Cadastrar um novo desenvolvedor
-app.get('/developers/:id', verifyIdDeveloperExist, getDeveloper); // Listar um desenvolvedor e seus projetos
+app.post('/developers', veriryEmailExist, createDevelper);
+app.get('/developers/:id', verifyIdDeveloperExist, getDeveloper);
 app.patch(
   '/developers/:id',
   veriryEmailExist,
   verifyIdDeveloperExist,
   editDeveloper
-); // Atualizar os dados de um desenvolvedor
-app.delete('/developers/:id', verifyIdDeveloperExist, deleteDeveloper); // Remover um desenvolvedor
-app.post('/developers/:id/infos', verifyIdDeveloperExist, developerInfo); // Cadastrar informações adicionais a um desenvolvedor
+);
+app.delete('/developers/:id', verifyIdDeveloperExist, deleteDeveloper);
+app.post('/developers/:id/infos', verifyIdDeveloperExist, developerInfo);
 
-app.post('/projects', verifyIdDeveloperExist, createProject); // Cadastrar um novo projeto
-app.get('/projects/:id', verifyProjectExist, getProjectById); // Listar um projeto pelo id
+app.post('/projects', verifyIdDeveloperExist, createProject);
+app.get('/projects/:id', verifyProjectExist, getProjectById);
 app.patch(
   '/projects/:id',
   verifyProjectExist,
   verifyIdDeveloperExist,
   editProject
-); // Atualizar um projeto
-app.delete('/projects/:id', verifyProjectExist, deleteProject); // Excluir um projeto
+);
+app.delete('/projects/:id', verifyProjectExist, deleteProject);
 app.post(
   '/projects/:id/technologies',
   verifyProjectExist,
   verifyProjectTechnologiesExist,
   addTechnologies
-); // Cadastrar uma tecnologia para um projeto
+);
 app.delete(
   '/projects/:id/technologies/:name',
   verifyProjectExist,
   verifyProjectTechnologiesExist,
   deletetechnology
-); // Deletar uma tecnologia de um projeto
+);
 
 export default app;
