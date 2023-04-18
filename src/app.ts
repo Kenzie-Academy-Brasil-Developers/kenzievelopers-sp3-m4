@@ -26,8 +26,8 @@ app.post('/developers', veriryEmailExist, createDevelper);
 app.get('/developers/:id', verifyIdDeveloperExist, getDeveloper);
 app.patch(
   '/developers/:id',
-  veriryEmailExist,
   verifyIdDeveloperExist,
+  veriryEmailExist,
   editDeveloper
 );
 app.delete('/developers/:id', verifyIdDeveloperExist, deleteDeveloper);

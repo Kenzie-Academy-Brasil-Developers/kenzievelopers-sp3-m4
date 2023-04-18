@@ -13,12 +13,12 @@ export const editDeveloper = async (
 
   const stringUpdateDeveloper: string = format(
     `
-    UPDATE developers 
-    SET 
-      (%I) =
-      ROW (%L)
-    WHERE id = $1
-    RETURNING *;
+      UPDATE developers 
+        SET 
+          (%I) =
+         ROW (%L)
+      WHERE id = $1
+      RETURNING *;
   `,
     Object.keys(requestBody),
     Object.values(requestBody)

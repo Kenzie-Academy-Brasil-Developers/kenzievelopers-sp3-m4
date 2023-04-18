@@ -33,5 +33,5 @@ export const getProjectById = async (
 
   const queryResult: QueryResult = await client.query(queryConfig);
 
-  return res.status(200).json(queryResult.rows[0]);
+  return res.status(200).json(queryResult.rows);
 };

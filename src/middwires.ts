@@ -16,17 +16,17 @@ export const veriryEmailExist = async (
 ): Promise<Response | void> => {
   const requestData: TDevelopers = req.body;
 
-  const stringDeveloper: string = 'SELECT * FROM developers';
+  const stringDeveloper: string = `
+    SELECT * FROM developers
+    WHERE email = $1;
+   `;
 
   const queryResultDevelopers: QueryResult = await client.query(
-    stringDeveloper
+    stringDeveloper,
+    [req.body.email]
   );
 
-  const verifyEmailExist = queryResultDevelopers.rows.findIndex(
-    (developer: IDevelopers) => developer.email === requestData.email
-  );
-
-  if (verifyEmailExist !== -1)
+  if (queryResultDevelopers.rowCount !== 0)
     return res.status(409).json({
       message: 'Email already exists.',
     });
@@ -46,15 +46,16 @@ export const verifyIdDeveloperExist = async (
   if (req.route.path === '/projects' || req.route.path === '/projects/:id')
     idRequest = req.body.developerId;
 
-  const stringDevelopers: string = 'SELECT * FROM developers';
+  const stringDevelopers: string = `
+    SELECT * FROM developers
+    WHERE id = $1;
+  `;
 
-  const queryResult: QueryResult = await client.query(stringDevelopers);
+  const queryResult: QueryResult = await client.query(stringDevelopers, [
+    idRequest,
+  ]);
 
-  const findIndex = queryResult.rows.findIndex(
-    (developer: IDevelopers) => developer.id === idRequest
-  );
-
-  if (findIndex === -1)
+  if (queryResult.rowCount === 0)
     return res.status(404).json({
       message: 'Developer not found.',
     });
@@ -71,15 +72,16 @@ export const verifyProjectExist = async (
 ): Promise<Response | void> => {
   const idRequest: number = Number(req.params.id);
 
-  const stringDeveloper: string = 'SELECT * FROM projects';
+  const stringDeveloper: string = `
+    SELECT * FROM projects
+    WHERE id = $1;
+  `;
 
-  const queryResult: QueryResult = await client.query(stringDeveloper);
+  const queryResult: QueryResult = await client.query(stringDeveloper, [
+    idRequest,
+  ]);
 
-  const findIndex = queryResult.rows.findIndex(
-    (developer: IProjects) => developer.id === idRequest
-  );
-
-  if (findIndex === -1)
+  if (queryResult.rowCount === 0)
     return res.status(404).json({
       message: 'Project not found.',
     });

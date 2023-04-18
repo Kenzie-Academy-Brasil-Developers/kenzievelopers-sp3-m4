@@ -8,7 +8,7 @@ export const editProject = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const id: number = res.locals.id;
+  const id: number = Number(req.params.id);
   const bodyRequest: Partial<IProjects> = req.body;
 
   const stringEditProject: string = format(

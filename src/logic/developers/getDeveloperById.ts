@@ -10,7 +10,7 @@ export const getDeveloper = async (
 
   const stringRequestDeveloperById: string = `
     SELECT 
-      d.id developerId,
+      d.id "developerId",
       d.name "developerName",
       d.email "developerEmail",
       di."developerSince" "developerInfoDeveloperSince",

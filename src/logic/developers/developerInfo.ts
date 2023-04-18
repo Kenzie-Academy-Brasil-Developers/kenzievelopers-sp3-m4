@@ -46,11 +46,11 @@ export const developerInfo = async (
 
   const stringRequestDeveloperInfo: string = format(
     `
-  INSERT INTO developers_infos 
-    (%I)
-  VALUES
-    (%L)
-  RETURNING *;
+      INSERT INTO developers_infos 
+        (%I)
+      VALUES
+        (%L)
+      RETURNING *;
   `,
     Object.keys(developerInfoRequest),
     Object.values(developerInfoRequest)
